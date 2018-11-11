@@ -68,11 +68,10 @@ public class PlayerDatabase {
          
          //add given values to database
          StringBuilder sb = new StringBuilder(name);
+         String en = Crypt.encrypt(password, name);
          
-         sb.append(","); 
-         String en = Crypt.encrypt(password, name + "     Add Player");
-         sb.append(en);
-         
+         sb.append(","); sb.append(en);
+
          sb.append(","); sb.append(question1);
          sb.append(","); sb.append(ans1);
          sb.append(","); sb.append(question2);
@@ -267,7 +266,8 @@ public class PlayerDatabase {
 						BufferedReader br = new BufferedReader(isr)) {
 					
 					System.out.print("Please enter your new password: ");
-					String newPassword = keyboardInput.readLine();
+                    String newPassword = keyboardInput.readLine();
+                    String en = Crypt.encrypt(newPassword, name);
 					
 					// reads database line by line adding lines in to a collective string of all the lines
 					while ((line = br.readLine()) != null) {
@@ -280,7 +280,7 @@ public class PlayerDatabase {
 						else {
 							for (int i = 0; i < info.length; i++) {
 								if(i != 1) newLine = newLine + info[i] + ",";
-								else newLine = newLine + newPassword + ",";
+								else newLine = newLine + en + ",";
 							}
 							lines.append(newLine + "\n");
 						}
