@@ -69,7 +69,10 @@ public class PlayerDatabase {
          //add given values to database
          StringBuilder sb = new StringBuilder(name);
          
-         sb.append(","); sb.append(password);
+         sb.append(","); 
+         String en = Crypt.encrypt(password, name + "     Add Player");
+         sb.append(en);
+         
          sb.append(","); sb.append(question1);
          sb.append(","); sb.append(ans1);
          sb.append(","); sb.append(question2);
@@ -137,7 +140,8 @@ public class PlayerDatabase {
              
              //checks if the username on this line is equal to the given username
 			if(info[0].equals(name)) {
-                if(info[1].equals(password))
+				String decrypted = Crypt.decrypt(info[1], name);
+                if(decrypted.equals(password))
                     return true;
              }
 			 }
