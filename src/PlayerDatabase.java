@@ -140,6 +140,7 @@ public class PlayerDatabase {
              //checks if the username on this line is equal to the given username
 			if(info[0].equals(name)) {
 				String decrypted = Crypt.decrypt(info[1], name);
+				System.out.println(decrypted);
                 if(decrypted.equals(password))
                     return true;
              }
