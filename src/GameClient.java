@@ -321,14 +321,15 @@ public class GameClient {
                     else {
                     	System.out.println("Password does not match");
                     	passwordsEnteredCount++;
-                    	if (passwordsEnteredCount > 3) {
+                    	if (passwordsEnteredCount == 3) {
                             System.out.println("Please use your security questions to reset password");
                             System.out.println("NOTE: Answers are Case-Sensitive");
                     		if(PlayerDatabase.checkSecurityQestions(playerName)) {
                     			update();
                     			if(PlayerDatabase.changePassword(playerName)) {
                     				update();
-                    				System.out.println("Password has been updated.");
+                                    System.out.println("Password has been updated.");
+                                    passwordsEnteredCount = 0;
                     			}
                     			else System.out.println("Password update failed.");
                     		}
