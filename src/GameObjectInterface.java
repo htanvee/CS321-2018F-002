@@ -21,6 +21,8 @@ public interface GameObjectInterface extends Remote {
      */
     public boolean joinGame(String name) throws RemoteException;
 
+    public boolean playerExists(String name) throws RemoteException;
+
     public String gift(String playerName, String name, double amount) throws RemoteException;
 
     /**

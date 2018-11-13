@@ -32,7 +32,7 @@ public class PlayerList implements Iterable<Player> {
         }
         return null;
     }
-    
+
     public void removePlayer(String name) {
         Player player = findPlayer(name);
         if(player != null) {

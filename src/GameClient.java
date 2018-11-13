@@ -198,7 +198,12 @@ public class GameClient {
                     if(!PlayerDatabase.isUname(playerName)){
                         nameSat = false; continue;
                     }
-                    if(PlayerDatabase.isPlayer(playerName))
+                    if(remoteGameInterface.playerExists(playerName))
+                    {
+                        System.out.println("ERROR: USER IS ALREADY LOGGED ON");
+                        nameSat = false;
+                    }
+                    else if(PlayerDatabase.isPlayer(playerName))
                     {
                         System.out.println("Username already exits... Please enter a new username\n");
                         nameSat = false;
@@ -292,8 +297,12 @@ public class GameClient {
                     System.out.println("Please enter your username");
                     System.out.print("> ");
                     this.playerName = keyboardInput.readLine(); update();
-                    if(PlayerDatabase.isPlayer(playerName)) break;
-                    else System.out.println("Username is incorrect... Please enter a new username");
+                    if(PlayerDatabase.isPlayer(playerName))
+                    {
+                        if(!remoteGameInterface.playerExists(playerName)) break;
+                        else System.out.println("ERROR: USER IS ALREADY LOGGED IN\n");
+                    }
+                    else System.out.println("Username is incorrect... Please enter a new username\n");
                 }while(true); //exits the loop only through a break
 
                 boolean conf = false; newuser = false; boolean isPassword = false;
@@ -368,7 +377,7 @@ public class GameClient {
                 } else if (keyboardStatement.equalsIgnoreCase("N")) {
                     break;
                 }
-                System.out.print("Would you like to permanently delete your player and account? (Y/N)");
+                System.out.print("Would you like to permanently delete your player and account? (Y/N) ");
                 keyboardStatement = keyboardInput.readLine();
                 update();
             } while (true);

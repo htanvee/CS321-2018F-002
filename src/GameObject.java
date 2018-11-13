@@ -55,6 +55,18 @@ public class GameObject extends UnicastRemoteObject implements GameObjectInterfa
         // Request join to the core and return the results back to the remotely calling method.
         return (core.joinGame(name) != null);
     }
+
+    /**
+     * Determines if a player exists in the system already
+     * @param name
+     * @return true if player does exists, false otherwise
+     * @throws RemoteException
+     */
+    public boolean playerExists(String name) throws RemoteException{
+        if(core.findPlayer(name) == null) return false;
+        else return true;
+    }
+
         
     /**
      * Returns a look at the area of the specified player.
